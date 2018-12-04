@@ -1,0 +1,28 @@
+# Copyright (c) 2017 ~ 2025, the original author wangl.sir individual Inc,
+# All rights reserved. Contact us 983708408@qq.com
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# #### Basic configuration. ####
+#
+
+#
+# Option (ROUTING/NAT) Push service deployment mode, if ROUTING mode, the client login success
+# will receive the cluster node list information returned by the server, otherwise if NAT mode
+# is configured, the server will not return to the cluster node list.
+deployment-mode: ROUTING
+
+# Global message flow business processing thread pool configuration.
+executors.properties:
+  # Hbase persistent thread pool.
+  hbasePersisPool:
+    corePoolSize: 1
+    maximumPoolSize: 10
+    keepAliveTime: 0
+    # Queue size can be received when the thread pool resource is tight.
+    acceptCount: 2000

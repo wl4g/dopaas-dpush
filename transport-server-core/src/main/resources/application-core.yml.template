@@ -1,0 +1,69 @@
+# Copyright (c) 2017 ~ 2025, the original author wangl.sir individual Inc,
+# All rights reserved. Contact us 983708408@qq.com
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# #### Core(Netty/RPC) configuration. ####
+#
+core:
+  # IP address for external service listen, Both internal and external network addresses
+  # can be used. When using NAT mode deployment, it is recommended to use internal network addresses.
+  hostname: 0.0.0.0
+  ctl-pkey: transport_
+  ctl-cluster-nodes-pkey: cluster_nodes_
+  ctl-appId-groups-pkey: appId_groups_
+  ctl-groupId-devices-pkey: groupId_devices_
+  ctl-deviceId-clientInfo-pkey: deviceId_clientInfo_
+  ctl-appId-device-connects-pkey: appId_device_connects_
+  ctl-deviceId-actor-pkey: actor_device_
+  ctl-msgId-rowKey-pkey: msgId_rowkey_
+  ctl-msgId-rowKey-expire: 7200
+  ctl-rest-auth-pkey: rest_auth_
+  rpc:
+    name: RpcServer
+    startup: true
+    port: 10030
+    backlog: 512
+    # Current node maximum connection number limit.
+    accpet-maxconnects: 1000
+    # Default connection number limit of the same appId.
+    default-appId-connects: 50
+    read-idle-seconds: 600
+    # Unlike the websocket client, the RPC client may be provider, because it may not receive messages at
+    # all and will only be pushed out, so writing a timeout needs to be set longer.
+    write-idle-seconds: 600
+    all-idle-seconds: 900
+    logging:
+      enable: false
+      level: INFO
+    #Prevent DDOS attack.
+    max-content-len: 32768
+  websocket:
+    name: WebSocket
+    startup: true
+    port: 10031
+    backlog: 512
+    # Current node maximum connection number limit.
+    accpet-maxconnects: 1000
+    # Default connection number limit of the same appId.
+    default-appId-connects: 100
+    read-idle-seconds: 600
+    # The meaning of `rpc.write-idle-seconds` in the same way is just the opposite.
+    write-idle-seconds: 600
+    all-idle-seconds: 900
+    logging:
+      enable: false
+      level: INFO
+    path: /ws
+    allow-extensions: true
+    http-aggregator:
+      max-content-len: 32768
+    ssl:
+      enable: false
+      keycert-chainfile: 
+      keyfile: 
